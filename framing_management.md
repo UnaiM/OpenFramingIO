@@ -43,10 +43,10 @@ The table above is very reduced compared to real shows. As you can see, it’s a
 
 Because of all this, we think the VFX shot pipeline could benefit from a system that is:
 
-* A one-stop solution to express all the required resolution and framing data for delivery
-* Capable of determining optimal resolutions, and providing the means to account for those, on every pipeline step
-* Independent from any software package
-* Artist-friendly (or rather, Supervisor-friendly)
+* A one-stop solution to express all the required resolution and framing data for delivery.
+* Capable of determining optimal resolutions, and providing the means to account for those, on every pipeline step.
+* Independent from any software package.
+* Artist-friendly (or rather, Editor/Supervisor-friendly).
 
 
 Data model
@@ -125,10 +125,8 @@ flowchart TB
 
 ### Footnotes on graphs above
 
-1. In cases where image borders are part of the result (letterboxing), if such borders fall between pixel edges, the user can decide whether to “premultiply” all channels _(Sharp borders_ off), and if not, how many of those border pixels to preserve _(Border threshold,_ 0.0 discarding all pixels that wouldn’t be opaque if _Sharp borders_ was on, and 1.0 preserving as many as possible).
-
+1. In cases where image borders are part of the result (letterboxing), if such borders fall between pixel edges, the user can decide whether to “premultiply” all channels _(Sharp borders_ off), and if not, how many of those border pixels to preserve _(Border threshold,_ 0.0 discarding all pixels that wouldn’t be opaque if _Sharp borders_ was off, and 1.0 preserving as many as possible).
 2. When reformatting an image that has previously been cropped, it might be in the user’s best interest to ensure that the original image borders fall on pixel edges.
-
 3. This node allows the user to “eat out” or recover rows of pixels on each edge separately. This deforms the image ever so slightly, which is desired in this case, as we’ve had to do so before, while trying to match the Editorial offlines.
 
 
@@ -139,9 +137,9 @@ Results can be obtained once the _Rules_ an image corresponds to, and the _Outpu
 
 1. (Optimisation) Discard pixels that don’t contribute to the final result.
 2. (Depending on _Settings > Log Space)_ Convert to generic* base-2 logarithmic space.
-3. Resample the image, based on a **single** 3×3 transformation matrix.
+3. Resample the image **once,** based on a 3×3 transformation matrix.
 4. (Depending on _Settings > Log Space)_ Convert back to linear* space.
 5. Redefine the image bounds (crop it).
-6. (Only if borders visible) Multiply every channel by a single mask.
+6. (Only if borders visible) Multiply every channel by the same mask.
 
 \* When it comes to filtering, colour management is negligible— you can’t really tell if an Alexa Wide Gamut image has been resampled in Log C V3 for example; just that it happened in a logarithmic space.
