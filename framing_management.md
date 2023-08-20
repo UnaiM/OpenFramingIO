@@ -130,10 +130,14 @@ flowchart TB
 3. This node allows the user to “eat out” or recover rows of pixels on each edge separately. This deforms the image ever so slightly, which is desired in this case, as we’ve had to do so before, while trying to match the Editorial offlines.
 
 
-Processing
+Evaluation
 ----------
 
-Results can be obtained once the _Rules_ an image corresponds to, and the _Output_ the user is requesting, are determined. Every transformation defined in the graph, is always achievable by the following chain of operations in a linear* colour space:
+Results can be obtained once the _Rules_ an image corresponds to, and the _Output_ the user is requesting, are determined.
+
+### Image processing
+
+Every transformation defined in the graph, is always achievable by the following chain of operations in a linear* colour space:
 
 1. (Optimisation) Discard pixels that don’t contribute to the final result.
 2. (Depending on _Settings > Log Space)_ Convert to generic* base-2 logarithmic space.
@@ -143,3 +147,9 @@ Results can be obtained once the _Rules_ an image corresponds to, and the _Outpu
 6. (Only if borders visible) Multiply every channel by the same mask.
 
 \* When it comes to filtering, colour management is negligible— you can’t really tell if an Alexa Wide Gamut image has been resampled in Log C V3 for example; just that it happened in a logarithmic space.
+
+### Viewport hints
+
+Defining such a graph isn’t only useful for direct image manipulation, but also to provide the artist with visual guides on, for example, which areas of the image fall outside the borders of the frame that will be delivered.
+
+Calculating the corner coordinates of an _Output_ projected onto the area defined by a set of _Rules_ should be trivial, but usually **lens distortion** will need to be accounted for as well. This isn’t within the scope of this project.
