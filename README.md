@@ -1,5 +1,5 @@
-Framing Management
-==================
+OpenFramingIO (Draft)
+=====================
 
 **A framework to manage spatial image manipulations, with a focus on VFX shot deliveries.**
 
